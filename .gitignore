@@ -1,3 +1,5 @@
+# CSV's are input to the program
+*.csv
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]

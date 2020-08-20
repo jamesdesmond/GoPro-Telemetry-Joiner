@@ -2,9 +2,9 @@ import os
 import pandas as pd
 
 # Got these column names from GoProDataMergeProgram
+cols = ['GlobalTime','DateTime','Precision_i','Latitude_i','Longitude_i','Elevation_i','Speed_i','Elevation Meters','Elevation Feet','Total Ascent Meters','Total Descent Meters','Altitude Min Meters','Altitude Max Meters','Total Ascent Feet','Total Descent Feet','Altitude Min Feet','Altitude Max Feet','Speed KPH','Speed MPH','GPS_X','GPS_Y','Distance Feet','Distance Meters','Distance Miles','Distance Kilometers','Heading','GPS AccelGs','GPS LatGs','GPS 2D Gs']
 acc_cols = ['GlobalTime','Total Ascent Meters','Total Descent Meters','Altitude Min Meters','Altitude Max Meters','Total Ascent Feet','Total Descent Feet','Altitude Min Feet','Altitude Max Feet','Distance Feet','Distance Meters','Distance Miles','Distance Kilometers']
-
-final_df = pd.DataFrame(columns=acc_cols)
+final_df = pd.DataFrame(columns=cols)
 path = 'input/'
 fileList = os.listdir(path)
 for file in fileList:
@@ -18,5 +18,5 @@ for file in fileList:
             # now we must add value_to_add to temp_df[acc_col]
             temp_df[acc_col] = temp_df[acc_col] + value_to_add
     final_df = final_df.append(temp_df)
-final_df = final_df[acc_cols]
+final_df = final_df[cols]
 final_df.to_csv('merged_output.csv', index=False)

@@ -1,13 +1,31 @@
-import os
+import os, sys, argparse
 import pandas as pd
+import ffmpeg
 
+# TODO: add GUI with folder picker
+# TODO: create another script which renames the mp4 files based on their date-modified value,
+#  then Dashware will create correctly ordered CSVs
+# TODO: eventually have users select folder of mp4 files which I merge with ffmpeg, then Dashware creates a single csv,
+#  then i read the csv, and if any accumulating value goes down, then I reset it (however be careful of like
+#  Min altitude and how I check these values
+# TODO: https://community.gopro.com/t5/en/GoPro-Camera-File-Naming-Convention/ta-p/390220 is the insane way which GP
+#  names videos, I need to make sure I parse the files in correct order or else data will be all over the place.
 # Got these column names from GoProDataMergeProgram
-cols = ['GlobalTime','DateTime','Precision_i','Latitude_i','Longitude_i','Elevation_i','Speed_i','Elevation Meters','Elevation Feet','Total Ascent Meters','Total Descent Meters','Altitude Min Meters','Altitude Max Meters','Total Ascent Feet','Total Descent Feet','Altitude Min Feet','Altitude Max Feet','Speed KPH','Speed MPH','GPS_X','GPS_Y','Distance Feet','Distance Meters','Distance Miles','Distance Kilometers','Heading','GPS AccelGs','GPS LatGs','GPS 2D Gs']
-acc_cols = ['GlobalTime','Total Ascent Meters','Total Descent Meters','Altitude Min Meters','Altitude Max Meters','Total Ascent Feet','Total Descent Feet','Altitude Min Feet','Altitude Max Feet','Distance Feet','Distance Meters','Distance Miles','Distance Kilometers']
+cols = ['GlobalTime', 'DateTime', 'Precision_i', 'Latitude_i', 'Longitude_i', 'Elevation_i', 'Speed_i',
+        'Elevation Meters',
+        'Elevation Feet', 'Total Ascent Meters', 'Total Descent Meters', 'Altitude Min Meters', 'Altitude Max Meters',
+        'Total Ascent Feet', 'Total Descent Feet', 'Altitude Min Feet', 'Altitude Max Feet', 'Speed KPH', 'Speed MPH',
+        'GPS_X'
+    , 'GPS_Y', 'Distance Feet', 'Distance Meters', 'Distance Miles', 'Distance Kilometers', 'Heading', 'GPS AccelGs',
+        'GPS LatGs', 'GPS 2D Gs']
+acc_cols = ['GlobalTime', 'Total Ascent Meters', 'Total Descent Meters', 'Altitude Min Meters', 'Altitude Max Meters',
+            'Total Ascent Feet', 'Total Descent Feet', 'Altitude Min Feet', 'Altitude Max Feet', 'Distance Feet',
+            'Distance Meters', 'Distance Miles', 'Distance Kilometers']
 final_df = pd.DataFrame(columns=cols)
-path = 'input/'
+path = 'input/csv'
 fileList = os.listdir(path)
 for file in fileList:
+    print(file)
     with pd.option_context('display.precision', 10):
         temp_df = pd.read_csv(path + file, float_precision=None)
     for acc_col in final_df[acc_cols]:

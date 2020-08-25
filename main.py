@@ -3,8 +3,7 @@ import pandas as pd
 import ffmpeg
 
 # TODO: add GUI with folder picker
-# TODO: create another script which renames the mp4 files based on their date-modified value,
-#  then Dashware will create correctly ordered CSVs
+
 # TODO: eventually have users select folder of mp4 files which I merge with ffmpeg, then Dashware creates a single csv,
 #  then i read the csv, and if any accumulating value goes down, then I reset it (however be careful of like
 #  Min altitude and how I check these values

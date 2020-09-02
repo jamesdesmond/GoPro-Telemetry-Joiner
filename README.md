@@ -10,5 +10,5 @@ This script takes any filetype as input, however it is meant to be used on the o
 ## [mergeCSV.py](https://github.com/jamesdesmond/GoPro-Telemetry-Joiner/blob/master/mergeCSV.py)
 This script will take many CSV's, and based on the alphanumeric sorting of the filenames, will merge the data. Accumulating values like "Distance Travelled" will accumulate properly. 
 
-## [readMP4](https://github.com/jamesdesmond/GoPro-Telemetry-Joiner/blob/master/readMP4.py)
+## [readMP4.py](https://github.com/jamesdesmond/GoPro-Telemetry-Joiner/blob/master/readMP4.py)
 This script when completed will take the original MP4's created by the gopro, rename them properly, strip the telemetry data from the mp4, merge the video files, and then merge the telemetry data files. This will utilize the previous two scripts as well as require ffmpeg libraries to be used, and a library like: https://github.com/stilldavid/gopro-utils
